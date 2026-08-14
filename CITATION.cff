@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Extraction of Robust Commands from SSVEP Signals for Use in Brain–Computer Interfaces"
+authors:
+  - family-names: "Danesh Amooz"
+    given-names: "Farooq"
+    affiliation: "University of Tabriz, Department of Electrical and Computer Engineering"
+date-released: 2026-08-12
+url: "https://github.com/<your-username>/ssvep-robust-bci"
+repository-code: "https://github.com/<your-username>/ssvep-robust-bci"
+license: "MIT"
+abstract: >
+  A five-key SSVEP/c-VEP brain-computer interface control panel for wheelchair
+  control, with a literature review organizing SSVEP-BCI decoding methods by
+  a three-dimensional robustness taxonomy (within-trial noise, cross-subject/
+  low-calibration, and adversarial robustness), and three proposed, testable
+  robustness mechanisms (H1: color+frequency redundancy; H2: trial-by-trial
+  online adaptation; H3: code-modulated STOP key).
+keywords:
+  - brain-computer-interface
+  - SSVEP
+  - cVEP
+  - EEG
+  - assistive-technology
+  - wheelchair-control

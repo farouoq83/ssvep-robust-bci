@@ -1,0 +1,12 @@
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+matplotlib>=3.8
+mne>=1.6            # reads .edf files natively — no separate EDF library needed
+scikit-learn>=1.3
+jupyter>=1.0
+notebook>=7.0
+
+# pyEDFlib removed: no prebuilt Windows wheel yet for Python 3.14 as of Aug 2026,
+# and building from source needs Microsoft C++ Build Tools. mne.io.read_raw_edf()
+# covers the same need without that dependency.

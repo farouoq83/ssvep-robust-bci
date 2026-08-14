@@ -1,0 +1,43 @@
+# ============================================================
+# Data — EXCLUDED BY DEFAULT until public-release consent is confirmed.
+# See data/README.md and data/CONSENT.md before changing this.
+# Once consent is confirmed, comment out the two lines below to include
+# the .edf files in the repository.
+# ============================================================
+data/raw/*.edf
+data/raw/*.EDF
+
+# Keep the raw/ folder itself tracked (via .gitkeep) even though its
+# contents are ignored, so the folder structure is still visible on GitHub.
+!data/raw/.gitkeep
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.venv/
+*.egg-info/
+
+# ============================================================
+# LaTeX build artifacts (keep the .tex source and final .pdf,
+# ignore everything pdflatex generates along the way)
+# ============================================================
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# ============================================================
+# OS / editor clutter
+# ============================================================
+.DS_Store
+Thumbs.db
+.vscode/
