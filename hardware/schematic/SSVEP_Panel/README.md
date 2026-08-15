@@ -1,0 +1,1 @@
+The main curcuit is ssvep_panel_netlist.net file and the other files (all belong to KiCAD) are a simplified version of the circuit (only for plotting the circuit in the report).

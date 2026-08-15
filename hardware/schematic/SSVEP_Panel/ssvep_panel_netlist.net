@@ -1,0 +1,129 @@
+* ============================================================
+* SSVEP 5-KEY WHEELCHAIR STIMULUS PANEL - CIRCUIT NETLIST
+* Project: Extraction of Robust Commands from SSVEP Signals
+* Author reference for: Farooq - University of Tabriz
+* Supervisor: Prof. Hadi Seyedarabi
+*
+* FORMAT: This is a human-readable "as-built" netlist, not a
+* CAD-tool-generated file. It lists every component (with a
+* reference designator) and every net (a net = a wire that
+* connects two or more pins together at the same electrical
+* point).
+*
+* IMPORTANT - VERIFY BEFORE BUILDING:
+* Pin numbers for ULN2003AG and STM32F103C8T6 below are written
+* from standard datasheet pinouts. Confirm every pin number
+* against YOUR component's actual datasheet before soldering.
+* A wrong pin number here could damage a component.
+* ============================================================
+
+
+* ---------------------------------------------------------
+* SECTION 1: COMPONENT LIST (Reference Designators)
+* ---------------------------------------------------------
+
+BT1     : Li-ion battery cell (single cell, ~3.7V nominal)          [not in your parts list - confirm you have one]
+U1      : TP4056                  - battery charge controller
+U2      : XL6009E1                - DC-DC boost converter
+U3      : L7805CV (#1)            - linear regulator, LOGIC 5V rail
+U4      : L7805CV (#2)            - linear regulator, LED 5V rail
+U5      : STM32F103C8T6 Blue Pill - main microcontroller (MCU)
+U6      : ULN2003AG               - Darlington driver array (7 channels, 5 used)
+U7      : HC-05                   - Bluetooth serial module
+RLDR1   : Photoresistor (LDR)     - light sensor for verification
+R18     : Fixed resistor, ~10k ohm - photoresistor divider (VERIFY value against your LDR's datasheet)
+C1, C2  : ~0.33uF / ~0.1uF        - U3 input/output caps (typical L7805 app values - VERIFY datasheet)
+C3, C4  : ~0.33uF / ~0.1uF        - U4 input/output caps (typical L7805 app values - VERIFY datasheet)
+SW1     : Power switch (optional) - master on/off
+
+D1, D2, D3       : Forward key LEDs   (3x)
+D4, D5, D6       : Backward key LEDs  (3x)
+D7, D8, D9       : Left key LEDs      (3x)
+D10, D11, D12    : Right key LEDs     (3x)
+D13-D17          : STOP key LEDs      (5x)
+
+R1-R3   : ~105 ohm - series resistor per Forward LED  (D1,D2,D3)
+R4-R6   : ~105 ohm - series resistor per Backward LED (D4,D5,D6)
+R7-R9   : ~105 ohm - series resistor per Left LED     (D7,D8,D9)
+R10-R12 : ~105 ohm - series resistor per Right LED    (D10,D11,D12)
+R13-R17 : ~105 ohm - series resistor per STOP LED     (D13-D17)
+
+
+* ---------------------------------------------------------
+* SECTION 2: NET LIST (Net_Name : connected pins)
+* ---------------------------------------------------------
+
+NET_BATT+     : BT1.+, U1.B+
+NET_BATT-     : BT1.-, U1.B-, GND
+GND           : U1.GND, U2.GND, U3.GND(pin2), U4.GND(pin2), U5.GND,
+                U6.GND(pin8/E), U7.GND, RLDR1.bottom(via R18), SW1.common,
+                C1.-, C2.-, C3.-, C4.-
+
+NET_CHG_OUT   : U1.OUT+, U2.VIN      (TP4056 charged output feeds boost converter input)
+
+NET_BOOST_OUT : U2.VOUT, U3.VIN(pin1), U4.VIN(pin1), C1.+, C3.+
+                (Set U2 output ~9V using its onboard trimpot/feedback resistors
+                 - VERIFY actual output with multimeter BEFORE connecting U3/U4)
+
+NET_5V_LOGIC  : U3.VOUT(pin3), U5.5V_pin, U7.VCC, C2.+
+                (This rail powers the Blue Pill's onboard 3.3V regulator
+                 and the HC-05 module - kept separate from LED rail on purpose)
+
+NET_5V_LED    : U4.VOUT(pin3), U6.COM(pin9), C4.+,
+                R1.pin1, R2.pin1, R3.pin1,      (Forward LEDs anode side)
+                R4.pin1, R5.pin1, R6.pin1,      (Backward LEDs anode side)
+                R7.pin1, R8.pin1, R9.pin1,      (Left LEDs anode side)
+                R10.pin1, R11.pin1, R12.pin1,   (Right LEDs anode side)
+                R13.pin1, R14.pin1, R15.pin1, R16.pin1, R17.pin1  (STOP LEDs anode side)
+
+* ---- Forward key (12 Hz) ----
+NET_GPIO_PA0    : U5.PA0, U6.IN1(pin1)
+NET_ULN_OUT1    : U6.OUT1(pin16), D1.cathode, D2.cathode, D3.cathode
+NET_R1_D1       : R1.pin2, D1.anode
+NET_R2_D2       : R2.pin2, D2.anode
+NET_R3_D3       : R3.pin2, D3.anode
+
+* ---- Backward key (8 Hz) ----
+NET_GPIO_PA1    : U5.PA1, U6.IN2(pin2)
+NET_ULN_OUT2    : U6.OUT2(pin15), D4.cathode, D5.cathode, D6.cathode
+NET_R4_D4       : R4.pin2, D4.anode
+NET_R5_D5       : R5.pin2, D5.anode
+NET_R6_D6       : R6.pin2, D6.anode
+
+* ---- Left key (13 Hz) ----
+NET_GPIO_PA2    : U5.PA2, U6.IN3(pin3)
+NET_ULN_OUT3    : U6.OUT3(pin14), D7.cathode, D8.cathode, D9.cathode
+NET_R7_D7       : R7.pin2, D7.anode
+NET_R8_D8       : R8.pin2, D8.anode
+NET_R9_D9       : R9.pin2, D9.anode
+
+* ---- Right key (9 Hz) ----
+NET_GPIO_PA3    : U5.PA3, U6.IN4(pin4)
+NET_ULN_OUT4    : U6.OUT4(pin13), D10.cathode, D11.cathode, D12.cathode
+NET_R10_D10     : R10.pin2, D10.anode
+NET_R11_D11     : R11.pin2, D11.anode
+NET_R12_D12     : R12.pin2, D12.anode
+
+* ---- STOP key (10 Hz) - safety critical, isolated on TIM3 ----
+NET_GPIO_PA6    : U5.PA6, U6.IN5(pin5)
+NET_ULN_OUT5    : U6.OUT5(pin12), D13.cathode, D14.cathode, D15.cathode, D16.cathode, D17.cathode
+NET_R13_D13     : R13.pin2, D13.anode
+NET_R14_D14     : R14.pin2, D14.anode
+NET_R15_D15     : R15.pin2, D15.anode
+NET_R16_D16     : R16.pin2, D16.anode
+NET_R17_D17     : R17.pin2, D17.anode
+
+* ---- Photoresistor verification divider ----
+NET_3V3         : U5.3V3_pin, RLDR1.top
+NET_LDR_MID     : RLDR1.bottom, R18.pin1, U5.PA4(ADC12_IN4), [scope probe point]
+NET_LDR_GND     : R18.pin2, GND
+
+* ---- HC-05 Bluetooth sync link ----
+NET_UART_TX     : U5.PA9(USART1_TX), U7.RXD
+NET_UART_RX     : U5.PA10(USART1_RX), U7.TXD
+
+* ---------------------------------------------------------
+* END OF NETLIST
+* Unused ULN2003AG channels: IN6/OUT6, IN7/OUT7 - leave
+* unconnected (spare capacity for a future 6th/7th command key).
+* ---------------------------------------------------------
