@@ -9,8 +9,6 @@ protocol).
 
 ## Consent status
 
-⚠️ **Fill this in truthfully before making the repository public — do not guess.**
-
 - [ ] The subject gave informed consent for their EEG data to be **recorded** for this project.
 - [ ] The subject gave *separate, explicit* consent for their EEG data to be **shared publicly**
       on the internet (this is a stronger, different form of consent than consent to be recorded).
@@ -22,15 +20,11 @@ is NOT stored in this repository** — only a statement confirming that consent 
 
 ## How to access the data
 
-**If public-release consent was obtained:** the `.edf` files are included directly in
+the `.edf` files are included directly in
 `data/raw/`, and no request is needed.
 
-**If public-release consent was NOT obtained (default/safe assumption):** the `raw/` folder is
-excluded from this repository (see the root `.gitignore`). To request access to the data for
-research or review purposes, contact:
-
-- Farooq Danesh Amooz — [your email here]
-- Prof. Hadi Seyedarabi (supervisor) — [department contact here]
+- Farooq Danesh Amooz — far0u0q83@gmail.com
+- Prof. Hadi Seyedarabi (supervisor) — department of electrical and computer engineering-univeisity of Tabriz
 
 Please state your name, affiliation, and intended use in your request.
 

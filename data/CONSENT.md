@@ -7,20 +7,17 @@ personal information.
 
 ## Statement
 
-*(Edit this section to accurately describe what actually happened — do not leave placeholder
-text in a published repository.)*
-
-> The EEG recording described in `data/README.md` was collected on [DATE] from one adult
+> The EEG recording described in `data/README.md` was collected on Augest/08/2026 from one adult
 > volunteer subject. The subject was informed, verbally and/or in writing, of the purpose of
 > the recording (an undergraduate thesis project on SSVEP/c-VEP brain–computer interfaces),
-> the recording procedure, and [his/her/their] right to stop the session at any time.
-> The subject [DID / DID NOT] additionally consent to the recorded data being shared publicly
+> the recording procedure, and his right to stop the session at any time.
+> The subject DID additionally consent to the recorded data being shared publicly
 > for research and educational purposes.
 
 ## Who to contact with questions
 
 - Researcher: Farooq Danesh Amooz, Department of Electrical and Computer Engineering,
-  University of Tabriz — [your email here]
+  University of Tabriz — far0u0q83@gmail.com
 - Supervisor: Prof. Hadi Seyedarabi
 
 ## If consent for public release was not given
